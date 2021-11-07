@@ -34,7 +34,7 @@ func (l *GetUserLogic) GetUser(in *user.IdRequest) (*user.UserResponse, error) {
 	id, _ := strconv.ParseInt(in.Id, 10, 64)
 	userObj, err := l.svcCtx.UserModel.FindOne(id)
 	if err != nil {
-		fmt.Println("报错的是", err)
+		fmt.Println("报错的是", err, "flag错误是", userObj)
 	}
 	return &user.UserResponse{
 		Id: strconv.Itoa(int(userObj.Id)),
