@@ -37,7 +37,7 @@ func (l *GetUserLogic) GetUser(in *user.IdRequest) (*user.UserResponse, error) {
 		fmt.Println("报错的是", err)
 	}
 	return &user.UserResponse{
-		Id: string(userObj.Id),
+		Id: strconv.Itoa(int(userObj.Id)),
 		Name: userObj.Name,
 	}, nil
 }
