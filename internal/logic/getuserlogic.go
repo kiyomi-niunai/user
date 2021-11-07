@@ -2,6 +2,9 @@ package logic
 
 import (
 	"context"
+	"fmt"
+	"strconv"
+
 	//"fmt"
 	//"github.com/kiyomi-niunai/user/model"
 	//"github.com/tal-tech/go-zero/core/stores/cache"
@@ -28,14 +31,13 @@ func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserLo
 
 func (l *GetUserLogic) GetUser(in *user.IdRequest) (*user.UserResponse, error) {
 	// todo: add your logic here and delete this line]
-	//var conn sqlx.SqlConn
-	//var c cache.CacheConf
-	//userObj, err := model.NewUsersModel(conn, c).FindOne(10000619)
-	//if err != nil {
-	//	fmt.Println("报错的是", err)
-	//}
+	id, _ := strconv.ParseInt(in.Id, 10, 64)
+	userObj, err := l.svcCtx.UserModel.FindOne(id)
+	if err != nil {
+		fmt.Println("报错的是", err)
+	}
 	return &user.UserResponse{
-		Id: "222",
-		Name: "test",
+		Id: string(userObj.Id),
+		Name: userObj.Name,
 	}, nil
 }
