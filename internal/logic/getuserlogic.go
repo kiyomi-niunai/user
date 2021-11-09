@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	//"fmt"
-	//"github.com/kiyomi-niunai/user/model"
+	"github.com/kiyomi-niunai/user/model"
 	//"github.com/tal-tech/go-zero/core/stores/cache"
 	//"github.com/tal-tech/go-zero/core/stores/sqlx"
 
@@ -32,9 +32,11 @@ func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserLo
 func (l *GetUserLogic) GetUser(in *user.IdRequest) (*user.UserResponse, error) {
 	// todo: add your logic here and delete this line]
 	id, _ := strconv.ParseInt(in.Id, 10, 64)
-	userObj, err := l.svcCtx.UserModel.FindOne(id)
-	if err != nil {
-		fmt.Println("报错的是", err, "flag错误是", userObj)
+	fmt.Println("id是多少", id)
+	var userObj model.Users
+	l.svcCtx.DB.First(&userObj, id)
+	if userObj.Id == 0 {
+		fmt.Println("找不到该用户", id)
 	}
 	return &user.UserResponse{
 		Id: strconv.Itoa(int(userObj.Id)),

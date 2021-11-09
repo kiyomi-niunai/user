@@ -26,6 +26,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	srv := server.NewUserServer(ctx)
 
+
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		user.RegisterUserServer(grpcServer, srv)
 

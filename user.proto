@@ -19,4 +19,5 @@ syntax = "proto3";
 
   service User {
       rpc getUser(IdRequest) returns(UserResponse);
+      rpc userLogin(IdRequest) returns(UserResponse);
   }
